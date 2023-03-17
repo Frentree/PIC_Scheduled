@@ -33,6 +33,7 @@ public class ReconSchedulerJobs implements Runnable {
 	private static SqlMapClient sqlMap = null;		
 
 	private static String customer_id = "";
+	private static int ap_number = 0;
 //	private static int ap_no = 0;
 	
 	public ReconSchedulerJobs() {
@@ -43,9 +44,10 @@ public class ReconSchedulerJobs implements Runnable {
 	public void run() {
 
 		this.customer_id = AppConfig.getProperty("config.customer");
+		this.ap_number = AppConfig.getPropertyInt("config.recon.ap.number");
 		
 		if("SKT".equals(customer_id)) {
-			String str_ap_count = AppConfig.getProperty("config.recon.ap.count");
+			/*String str_ap_count = AppConfig.getProperty("config.recon.ap.count");
 			int ap_count = ("".equals(str_ap_count)) ? 1 : Integer.parseInt(str_ap_count);
 			System.out.println("ap Count >> " + ap_count);
 			logger.info("ap Count >> " + ap_count);
@@ -53,7 +55,8 @@ public class ReconSchedulerJobs implements Runnable {
 			for(int i=0; i<ap_count; i++) {
 //				this.ap_no = i;
 				executeRun(i);
-			}
+			}*/
+			executeRun(ap_number);
 		} else {
 			executeRun(0);
 		}
